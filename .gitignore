@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+venv/
+practice/**/venv/
+.env
+*.pyc
