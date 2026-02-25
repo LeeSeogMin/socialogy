@@ -114,7 +114,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 14주 운영 계획
 
-| 주차 | A회차(개념/도입) | B회차(스튜디오/과제) |
+| 주차 | A회차(개념/도입) | B회차(조별 과제) |
 |---:|---|---|
 | 1주 | AI 도구를 통계 학습의 조교로 어떻게 활용할까? | 환경 점검 + 미니 실습(과제 1) |
 | 2주 | 이 데이터를 믿을 수 있는가? — 데이터 리터러시 | 데이터 정리 체크포인트(과제 2) |
@@ -296,7 +296,7 @@ socialogy/
 ### 실습 환경
 - 코드/분석: Python(pandas, scipy, statsmodels) 또는 R
 - AI 도우미: GitHub Copilot
-- 팀 구성: 스튜디오 시간 3–4명 상호 점검
+- B회차 조별 과제: 같은 조(2–3인)끼리 협의·수행, 조별 1부 제출
 
 ---
 
