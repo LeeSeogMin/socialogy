@@ -5,7 +5,6 @@ practice/**/venv/
 .env
 *.pyc
 
-# 업로드 제외 폴더
 content/
 exam/
 schema/
