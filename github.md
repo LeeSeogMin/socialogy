@@ -1,3 +1,5 @@
+### 주의사항: 모든 컴퓨터 조작에서 한글 사용금지하고 반드시 영어문자를 사용해야 한다. 폴더명, 파일명 등등. 한글 사랑과 별개의 문제로서 피할 수 없는 문제이다. 
+
 # Git & GitHub & Copilit 가이드
 
 ## 1단계: Git 설치 (3분)
@@ -20,14 +22,18 @@ git --version
 
 1. https://github.com 접속
 2. "Sign up" → 학교 이메일로 가입
-3. 이메일 인증
+3. 이메일 인증 
+
+또는 구글 아이디 로그인도 됨
+
+username 반드시 복사해놓을것 
 
 ## 3단계: 로컬 연결 (1분)
 
-> VSCode 통합 터미널(Ctrl+`), CMD, PowerShell 중 어디서든 실행 가능. VSCode 통합 터미널 권장.
+> VSCode 통합 터미널(Ctrl+`), CMD, PowerShell 중 어디서든 실행 가능
 
 ```bash
-git config --global user.name "홍길동"
+git config --global user.name "홍길동"   <- 복사해놓은 유저네임 사용
 git config --global user.email "학교이메일@ac.kr"
 ```
 
@@ -52,7 +58,7 @@ GitHub는 **Copilot Free** (제한된 무료 플랜)와 **Copilot Pro** (고급 
 
 1. **GitHub 계정 준비**
    - 이미 계정이 있다면 로그인
-   - 없다면 [https://github.com](https://github.com/) 에서 새로 생성 (학교 이메일 추천)
+   - 없다면 [https://github.com](https://github.com/) 에서 새로 생성 (학교 이메일)
    - 기존 계정이 있으면 설정(https://github.com/settings/emails)에서 학교 이메일(.ac.kr)을 추가
    - **학교 이메일을 primary email(기본 이메일)로 설정** (드롭다운에서 선택 후 Save → 인증 인식을 도움. 나중에 개인 이메일로 되돌릴 수 있음)
    - 이메일 추가 후 verification link(인증 링크)를 클릭해 verified 상태로 만들기
@@ -70,10 +76,12 @@ GitHub는 **Copilot Free** (제한된 무료 플랜)와 **Copilot Pro** (고급 
    | ---- | ------------------------------- | --------- | ----------- | ------------------------------------------- |
    | 1    | 학교 공식 이메일 (.ac.kr)       | 매우 높음 | 즉시~수시간 | 대부분 자동 승인                            |
    | 2    | 학생증 사진 (재학증명서) 업로드 | 높음      | 1~5일       | 선명하게 촬영, 이름·학번·유효기간 보여야 함 |
-   | 3    | 재학증명서 pdf 업로드           | 높음      | 1~7일       | 최근 3개월 이내 발급본                      |
+   | 3    | 재학증명서 PNG 파일 업로드           | 높음      | 1~7일       | 최근 3개월 이내 발급본                      |
    | 4    | 등록금 영수증 + 신분증          | 중간      | 3~10일      | 최후의 수단                                 |
 
    → **한국 4년제 대학 재학생이라면 대부분 학교 이메일만으로 1~24시간 내 자동 승인**됩니다.
+   -> 재학증명서는 영문으로 받고 파일이 pdf 형태이니 아래의 사이트에서 이미지 파일로 변환한다. 
+   [text](https://smallpdf.com/kr/pdf-to-jpg?mu=b5Vg&mau=b5Vg&utm_campaign=21930591768_179389838308_pdf%20%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%B3%80%ED%99%98&utm_source=google&utm_medium=cpc&gad_source=1&gad_campaignid=21930591768&gbraid=0AAAAAoxWdI5FDXktGvqJ9ZNyQLXTc8MDQ&gclid=CjwKCAiAtq_NBhA_EiwA78nNWFiUmnB1IOiTjRV7UCOpP2bQMjfGXFEvuXCIDTDwhh8wizmKkR-nyxoC0hQQAvD_BwE)
 
 4. **승인 확인**
    - https://education.github.com/pack 에서 "Your pack" 상태 확인
@@ -112,64 +120,6 @@ GitHub는 **Copilot Free** (제한된 무료 플랜)와 **Copilot Pro** (고급 
 위 방법은 2026년 2월 6일 기준 GitHub 공식 문서 및 실제 학생 사례들을 종합한 **현재 가장 정확한 절차**입니다.
 
 학교 이메일이 있다면 거의 100% 성공한다고 봐도 무방합니다.
-
-# GitHub Copilot 사용 설명서
-
-이 문서는 VS Code에서 GitHub Copilot을 활용하는 방법을 안내합니다. 아래 캡처 이미지를 참고하여 주요 기능과 메뉴를 설명합니다.
-
----
-
-## 1. Copilot Chat 세션 시작
-
-- **새 챗 세션(New Chat Session)**: Ctrl+N 단축키로 새로운 Copilot Chat 세션을 시작할 수 있습니다.
-  **Continue In**: 챗 세션을 실행할 환경을 선택할 수 있습니다.
-  - Local(로컬): 현재 PC에서 직접 Copilot 챗을 실행합니다. 빠른 응답과 파일 접근이 가능합니다.
-  - Background(@cli): 명령줄 환경에서 Copilot을 실행합니다. 백그라운드 작업이나 자동화에 적합합니다.
-  - Cloud(@cloud): 클라우드 서버에서 Copilot 챗을 실행합니다. 대용량 작업, 서버 리소스 활용, 원격 협업에 유리합니다.
-
----
-
-## 2. 에이전트 및 역할 선택
-
-- **Agent 메뉴**: Ctrl+Shift+I로 Copilot의 역할을 선택할 수 있습니다.
-  - coder: 코드 작성
-  - graphic: 그래픽/다이어그램 생성
-  - planner: 집필 계획
-  - researcher: 자료 조사
-  - reviewer: 품질 검토
-  - writer: 원고 작성
-- **Plan/Ask**: 계획 수립 또는 질문 모드로 전환 가능
-- **커스텀 에이전트 구성**: 필요에 따라 직접 에이전트 역할을 추가/설정할 수 있습니다.
-
----
-
-## 3. 도구(툴) 설정
-
-- **Configure Tools**: Copilot이 사용할 수 있는 도구를 선택/해제할 수 있습니다.
-  - 예시: edit(파일 편집), execute(코드 실행), search(검색), todo(할 일 관리), web(웹 정보 수집) 등
-  - MCP 서버 기반의 확장 도구도 활성화 가능
-- **도구 선택 후 OK 버튼으로 적용**
-
----
-
-## 4. MCP 서버 및 확장 기능
-
-- **MCP 서버 알림**: 새로운 MCP 서버(예: mcp-server-time, GitHub 등)가 활성화되면 알림이 표시됩니다.
-- **자동 시작 옵션**: "Automatically start MCP servers" 체크박스로 서버 자동 실행 설정 가능
-
----
-
-## 5. Copilot 모델 선택
-
-- **모델 선택**: 하단 메뉴에서 GPT-4.1 등 Copilot이 사용할 모델을 선택할 수 있습니다.
-
----
-
-## 6. 기타 기능
-
-- **챗 세션 관리**: 여러 챗 세션을 동시에 운영 가능
-- **도구/에이전트/모델 조합**: 작업 목적에 따라 자유롭게 조합하여 활용
-
 ---
 
 
@@ -198,9 +148,19 @@ GitHub는 **Copilot Free** (제한된 무료 플랜)와 **Copilot Pro** (고급 
 python --version
 ```
 
-`Python 3.x.x`가 출력되면 성공입니다. 만약 `'python' is not recognized...` 오류가 나면 PATH 등록이 안 된 것이므로 Python을 제거 후 3번을 확인하며 재설치하세요.
+`Python 3.x.x`가 출력되면 성공입니다. 만약 `'python' is not recognized...` 오류가 나면 PATH 등록이 안 된 것이므로 Python을 제거 후 3번을 확인하며 재설치하세요. 
 
-### 3단계: 저장소 클론
+### 3단계: Copilot 확장 설치
+
+1. VS Code를 실행한다.
+2. 왼쪽 사이드바에서 **Extensions**(확장) 아이콘을 클릭한다.
+3. 검색창에 `GitHub Copilot`을 입력하고 **GitHub Copilot** 확장을 설치한다.
+4. 같은 방법으로 **GitHub Copilot Chat** 확장도 설치한다.
+5. Command Palette(Ctrl+Shift+P 또는 Cmd+Shift+P)를 열고 "Copilot: Sign In"을 선택하여 GitHub 계정으로 로그인한다.
+6. 우측 하단 상태바에서 Copilot 아이콘이 활성화되었는지 확인한다.
+
+
+### 4단계: 저장소 클론
 
 명령 프롬프트 열기 (Windows: `Win+R` → `cmd` 입력 → 확인):
 
