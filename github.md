@@ -66,7 +66,7 @@ GitHub는 **Copilot Free** (제한된 무료 플랜)와 **Copilot Pro** (고급 
 
    https://education.github.com/pack
 
-   또는 [https://education.github.com](https://education.github.com/) → "Get your pack" 클릭
+
 
 3. **학생 신분 증명** (가장 중요한 단계)
 
@@ -133,7 +133,8 @@ GitHub는 **Copilot Free** (제한된 무료 플랜)와 **Copilot Pro** (고급 
    - **Python** (Microsoft) — Python 개발 지원
    - **Jupyter** (Microsoft) — 노트북(.ipynb) 실행 지원
 
-> 좌측 사이드바 확장 아이콘(□) 클릭 → 검색창에 "Python", "Jupyter" 입력 → Install
+> 좌측 사이드바 확장 아이콘(□) 클릭 → 검색창에 "Python", "Jupyter" 입력 → Install 
+> 파일 메뉴 - 자동 저장 클릭
 
 ### 2단계: Python 설치
 
