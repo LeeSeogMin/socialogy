@@ -1,81 +1,83 @@
 """
-W02 실습 ③: MCAR 결측치 생성 + 중앙값 대체 + 원본 비교
-======================================================
-정제 데이터에서 무작위 결측(MCAR)을 만들고,
-중앙값으로 보완한 뒤 원본과 비교한다.
+W02 실습 ③: MCAR 결측치 대체 + 전후 비교
+========================================
+원시 데이터의 결측치를 MCAR로 가정하고,
+수치형은 중앙값, 범주형은 최빈값으로 대체한 뒤 전후를 비교한다.
 
 학습 목표:
-  1. MCAR 결측치를 직접 생성할 수 있다.
-  2. 중앙값 대체로 결측을 보완할 수 있다.
-  3. 보완 전후 평균·표준편차 변화를 해석할 수 있다.
+  1. 수치형 결측을 중앙값으로 대체할 수 있다.
+  2. 범주형 결측을 최빈값으로 대체할 수 있다.
+  3. 대체 전후 평균·표준편차 변화를 해석할 수 있다.
 """
 
 import pandas as pd
-import numpy as np
 from pathlib import Path
 
 
-def load_clean_data() -> pd.DataFrame:
-    """정제 데이터를 불러온다."""
-    data_path = Path(__file__).resolve().parent.parent / "data" / "social_survey_w02_clean.csv"
+def load_raw_data() -> pd.DataFrame:
+    """원시 데이터를 불러온다."""
+    data_path = Path(__file__).resolve().parent.parent / "data" / "social_survey_w02_raw.csv"
     df = pd.read_csv(data_path, encoding="utf-8-sig")
     return df
 
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("W02 실습 ③: MCAR 결측 생성 + 중앙값 대체 + 원본 비교")
+    print("W02 실습 ③: MCAR 결측치 대체 + 전후 비교")
     print("=" * 60)
 
-    df_clean = load_clean_data()
-    print(f"\n원본 행 수: {len(df_clean)}, 결측 수: {df_clean.isnull().sum().sum()}")
+    df = load_raw_data()
 
-    # ① MCAR 결측 생성: 소득 변수에서 무작위 20% 결측
-    print("\n① MCAR 결측 생성 (소득 변수, 20%)")
+    # ① 대체 전 현황 확인
+    print("\n① 대체 전 결측 현황")
+    print("-" * 60)
+    for col in df.columns:
+        cnt = df[col].isnull().sum()
+        if cnt > 0:
+            pct = cnt / len(df) * 100
+            print(f"  {col}: {cnt}건 ({pct:.1f}%)")
+
+    # 소득 대체 전 통계 저장
+    before_mean = df["소득"].mean()
+    before_std = df["소득"].std()
+    print(f"\n  소득 대체 전 — 평균: {before_mean:.1f}, 표준편차: {before_std:.1f}")
+
+    # ② 결측치 대체
+    print("\n② 결측치 대체")
     print("-" * 60)
 
-    np.random.seed(42)
-    mask = np.random.rand(len(df_clean)) < 0.2
-    df_missing = df_clean.copy()
-    df_missing.loc[mask, "소득"] = np.nan
+    df_filled = df.copy()
 
-    n_missing = df_missing["소득"].isnull().sum()
-    pct_missing = df_missing["소득"].isnull().mean() * 100
-    print(f"  결측 생성: {n_missing}건 ({pct_missing:.1f}%)")
+    # 수치형: 중앙값 대체
+    for col in ["소득", "생활만족도"]:
+        n_miss = df_filled[col].isnull().sum()
+        median_val = df_filled[col].median()
+        df_filled[col] = df_filled[col].fillna(median_val)
+        print(f"  {col}: {n_miss}건 → 중앙값({median_val:.0f})으로 대체")
 
-    # ② 중앙값 대체
-    print("\n② 중앙값 대체")
-    print("-" * 60)
+    # 범주형: 최빈값 대체
+    for col in ["성별", "교육수준"]:
+        n_miss = df_filled[col].isnull().sum()
+        mode_val = df_filled[col].mode()[0]
+        df_filled[col] = df_filled[col].fillna(mode_val)
+        print(f"  {col}: {n_miss}건 → 최빈값('{mode_val}')으로 대체")
 
-    before_mean = df_missing["소득"].mean()
-    before_std = df_missing["소득"].std()
+    print(f"\n  남은 결측: {df_filled.isnull().sum().sum()}건")
 
-    median_val = df_missing["소득"].median()
-    df_filled = df_missing.copy()
-    df_filled["소득"] = df_filled["소득"].fillna(median_val)
-    print(f"  대체값(중앙값): {median_val:.0f}만원")
-
+    # ③ 대체 전후 비교
     after_mean = df_filled["소득"].mean()
     after_std = df_filled["소득"].std()
-
-    # ③ 원본과 비교
-    original_mean = df_clean["소득"].mean()
-    original_std = df_clean["소득"].std()
 
     print("\n③ 소득 변수 전후 비교")
     print("-" * 60)
     print(f"{'':>14} {'평균':>10} {'표준편차':>10}")
-    print(f"{'원본(정답)':>14} {original_mean:>10.1f} {original_std:>10.1f}")
-    print(f"{'결측 상태':>14} {before_mean:>10.1f} {before_std:>10.1f}")
-    print(f"{'중앙값 대체':>14} {after_mean:>10.1f} {after_std:>10.1f}")
+    print(f"{'대체 전':>14} {before_mean:>10.1f} {before_std:>10.1f}")
+    print(f"{'대체 후':>14} {after_mean:>10.1f} {after_std:>10.1f}")
 
-    # ④ 해석 포인트
-    print("\n④ 해석 포인트")
-    print("-" * 60)
-    mean_diff = after_mean - original_mean
-    std_diff = after_std - original_std
-    print(f"  평균 변화: {mean_diff:+.1f} (원본 대비)")
-    print(f"  표준편차 변화: {std_diff:+.1f} (원본 대비)")
+    mean_diff = after_mean - before_mean
+    std_diff = after_std - before_std
+    print(f"\n  평균 변화: {mean_diff:+.1f}")
+    print(f"  표준편차 변화: {std_diff:+.1f}")
     print("  → 중앙값 대체는 평균을 크게 바꾸지 않지만,")
     print("    표준편차를 줄인다 (데이터가 중앙으로 몰림).")
 
