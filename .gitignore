@@ -4,8 +4,10 @@ venv/
 practice/**/venv/
 .env
 *.pyc
+*.log
 
 content/
+notebooks/answer/
 exam/
 schema/
 .claude/
@@ -17,3 +19,4 @@ todo.md
 *.zip
 *.tar.gz
 docs/*C.md
+practice/**/data/*_comparison.png
